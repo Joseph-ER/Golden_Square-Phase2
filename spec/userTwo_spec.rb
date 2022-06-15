@@ -11,7 +11,7 @@ RSpec.describe "uppercaseStart method" do
   context "given a string that does not end in punctuation" do
     it "returns a puncuation reminder" do
       result = punctuationEnd("Bad sentence.")
-      expect(result).to eq true💅
+      expect(result).to eq true
     end
   end
 end
