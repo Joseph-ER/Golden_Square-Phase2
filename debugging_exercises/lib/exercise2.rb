@@ -7,7 +7,7 @@ def encode(plaintext, key)
 end
 
 def decode(ciphertext, key)
-  cipher = key.chars.uniq + (('a'..'z').to_a - key.chars)
+  p cipher = key.chars.uniq + (('a'..'z').to_a - key.chars)
   plaintext_chars =  ciphertext.chars.map do |char|
     cipher[char.ord - 65]
   end
