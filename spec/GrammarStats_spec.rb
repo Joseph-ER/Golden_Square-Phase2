@@ -36,4 +36,35 @@ describe GrammarStats  do
       expect(result).to eq false
     end
   end
+
+  context "percentage method" do
+    it "tests 1 test for 100%" do
+     stats = GrammarStats.new
+     stats.check?("Test Sentence.")
+     result = stats.percentage_good
+     expect(result).to eq 100
+    end
+
+    it "tests 2 for 50%" do
+      stats = GrammarStats.new
+      stats.check?("Test Sentence.")
+      stats.check?("Test Sentence")
+      result = stats.percentage_good
+      expect(result).to eq 50
+    end
+
+    it "tests 8 for 13%" do
+      stats = GrammarStats.new
+      stats.check?("Test Sentence.")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      stats.check?("Test Sentence")
+      result = stats.percentage_good
+      expect(result).to eq 13
+    end
+  end
 end
