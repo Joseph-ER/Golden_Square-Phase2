@@ -17,11 +17,23 @@ class DiaryEntry
   end
 
   def reading_time(wpm)
-    @minutes = @number_of_words / wpm
+    minutes = @number_of_words / wpm
   end
 
   def reading_chunk(wpm, minutes)
-    chunk = @number_of_words / wpm
-    contents[chunk]
+    count = 0
+    text_size = minutes * wpm
+    contents_array = @contents.split(" ")
+    return "Nothing to read" if contents_array.empty?
+    while !contents_array.empty? do 
+      if contents_array.count >= text_size
+        return contents_array[0...text_size].join(" ")
+        contents_array.slice![0...text_size]
+        count += 1
+      else
+        return contents_array[0..-1].join(" ")
+        break
+      end   
+    end
   end
 end

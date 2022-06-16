@@ -52,11 +52,17 @@ describe DiaryEntry do
     end
   end
 
-  context "rading_chunk method " do
+  context "reading_chunk method " do
     it "returns chunk of contents depending on wpm and minutes" do
-      diary = DiaryEntry.new("test title ", "word "*400)
-      diary.count_words
-      expect(diary.reading_chunk(3,1)).to eq "word word word "
+      diary = DiaryEntry.new("test title ", "word "*10)
+      expect(diary.reading_chunk(3,1)).to eq "word word word"
     end
+
+    it "returns the following chunk when called again" do
+      diary = DiaryEntry.new("test title", "word word word cat cat cat dog dog dog")
+      diary.reading_chunk(3,1)
+      diary.reading_chunk(3,1)
+      expect(diary.reading_chunk(3,1)).to eq "cat cat cat"
+    end 
   end
 end
