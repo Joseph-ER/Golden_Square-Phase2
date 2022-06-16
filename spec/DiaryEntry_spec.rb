@@ -53,16 +53,33 @@ describe DiaryEntry do
   end
 
   context "reading_chunk method " do
-    it "returns chunk of contents depending on wpm and minutes" do
-      diary = DiaryEntry.new("test title ", "word "*10)
-      expect(diary.reading_chunk(3,1)).to eq "word word word"
+    it "if contents are readable in the time " do
+      diary = DiaryEntry.new("my title", "one two three")
+      chunk = diary.reading_chunk(200,1)
+      expect(chunk).to eq "one two three"
     end
 
-    it "returns the following chunk when called again" do
-      diary = DiaryEntry.new("test title", "word word word cat cat cat dog dog dog")
-      diary.reading_chunk(3,1)
-      diary.reading_chunk(3,1)
-      expect(diary.reading_chunk(3,1)).to eq "cat cat cat"
-    end 
+    it "returns the next chunk, next time we are asked "do
+      diary = DiaryEntry.new("my title", "one two three")
+      diary.reading_chunk(2,1)
+      chunk = diary.reading_chunk(2,1)
+      expect(chunk).to eq "three"
+    end
+
+    it "restarts after reading the whole contents"do
+    diary = DiaryEntry.new("my title", "one two three")
+     diary.reading_chunk(2,1)
+     diary.reading_chunk(2,1)
+     chunk = diary.reading_chunk(2,1)
+     expect(chunk).to eq "one two"
+    end
+    
+    it "restarts if it finished exactly on the end " do
+      diary = DiaryEntry.new("my title", "one two three")
+      diary.reading_chunk(2,1)
+      diary.reading_chunk(1,1)
+      chunk = diary.reading_chunk(2,1)
+      expect(chunk).to eq "one two"
+    end
   end
 end
