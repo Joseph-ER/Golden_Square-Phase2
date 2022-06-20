@@ -17,7 +17,7 @@ class TaskList
 
   def show_tasks
     if @task_list.length > 0
-      return @task_list.join(" ")
+      return @task_list.join("\n")
     else 
       fail "No tasks in list"
     end

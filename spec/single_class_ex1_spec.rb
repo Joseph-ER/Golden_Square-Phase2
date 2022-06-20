@@ -80,7 +80,7 @@ describe "add methd" do
       tasks.add("feed cat")
       tasks.add("rat play")
       tasks.add("coding work")
-      expect(tasks.show_tasks).to eq("feed cat rat play coding work")
+      expect(tasks.show_tasks).to eq("feed cat\nrat play\ncoding work")
     end 
   end
 
