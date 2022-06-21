@@ -10,9 +10,12 @@ class Diary
   end
 
   def show_entries
-    @diary_entries.each do |entry|
-      return entry
-    end
+    #show_arr = []
+    #@diary_entries.each do |entry|
+    #  show_arr.push(entry.show)
+    #end
+    #return @show_arr.join(", ")
+    @diary_entries
   end
 
   def add_number(diary_entry)

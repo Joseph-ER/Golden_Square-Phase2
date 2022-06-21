@@ -14,8 +14,10 @@ describe "integration " do
     it "show_entries method " do
       diary = Diary.new
       diary_entry = DiaryEntry.new("title","contents for show method")
+      diary_entry2 = DiaryEntry.new("title2","contents for show method2")
       diary.add_entry(diary_entry)
-      expect(diary.show_entries).to eq diary_entry
+      diary.add_entry(diary_entry2)
+      expect(diary.show_entries).to eq [diary_entry, diary_entry2]
     end
 
     it "add_numbers method passes no errors" do
